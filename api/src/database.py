@@ -17,8 +17,9 @@ collection = database.get_collection("coins")
 async def init_db():
     btc = Coin(name='BTC')
     eth = Coin(name='ETH')
+    ton = Coin(name='TON')
 
-    result = collection.insert_many([btc.__str__(), eth.__str__()])
+    result = collection.insert_many([btc.__str__(), eth.__str__(), ton.__str__()])
 
     print('База данных Mongo инициализирована')
 
