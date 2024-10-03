@@ -1,11 +1,7 @@
 import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
-if __name__ == '__main__':
-    from config import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASSWORD
-    from models.models import Coin
-else:
-    from src.config import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASSWORD
-    from src.models.models import Coin
+from config import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASSWORD
+from models.models import Coin
 
 MONGO_DETAILS = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}"
 
