@@ -1,0 +1,35 @@
+name: GitHub Actions
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:  
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
+      - name: Disable host key checking
+        run: |
+          mkdir -p ~/.ssh
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+
+      - name: Deploy to server with password
+        run: |
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" rsync -avz --exclude='.git' ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/html/crypto-tracker
+
+      - name: Restart application
+        run: |
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          cd /var/www/html/crypto-tracker
+          docker compose up -d --build
+          EOF
+
