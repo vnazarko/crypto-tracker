@@ -15,7 +15,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install sshpass
-        run: sudo apt-get install sshpass
+        run: |
+          sudo apt-get install sshpass
+          sudo apt update
+          sudo apt install rsync
+
 
       - name: Disable host key checking
         run: |
