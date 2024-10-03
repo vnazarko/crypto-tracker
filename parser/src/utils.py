@@ -47,7 +47,7 @@ async def get_price_binance(url: str) -> dict:
                 'rub': '0'
             }
     else:
-        raise ValueError('Invalid URL for Binance')
+        ic('Invalid URL for Binance')
 
 
 async def get_price_okx(url: str) -> dict:
@@ -69,7 +69,7 @@ async def get_price_okx(url: str) -> dict:
                 'rub': '0'
             }
     else:
-        raise ValueError('Invalid URL for OKX')
+        ic('Invalid URL for OKX')
 
 
 async def get_price_bybit(url: str) -> dict:
@@ -91,4 +91,4 @@ async def get_price_bybit(url: str) -> dict:
                 'rub': '0'
             }
     else:
-        raise ValueError('Invalid URL for Bybit')
+        ic('Invalid URL for Bybit')
