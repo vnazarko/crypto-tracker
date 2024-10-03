@@ -22,4 +22,4 @@ jobs:
 
       - name: Deploy application
         run: |
-          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" "cd /var/www/html/crypto-tracker && docker-compose up -d --build"
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" "cd /var/www/html/crypto-tracker && docker compose up -d --build"
