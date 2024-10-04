@@ -6,7 +6,12 @@ const testCallback = (user: any) => {
 <template>
     <header class="header">
         <h1 class="header_title">CryptoTrack</h1>
-        <TelegramLoginWidget telegram-login="my_bot" @callback="testCallback" />
+        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="CryptoTrackByNone1qqBot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        <script type="text/javascript">
+        function onTelegramAuth(user) {
+            alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+        }
+        </script>
     </header>
 </template>
 
