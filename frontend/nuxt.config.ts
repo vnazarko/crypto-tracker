@@ -9,5 +9,5 @@ export default defineNuxtConfig({
   css: ['assets/sass/main.sass'],
   runtimeConfig: {
     TELEGRAM_TOKEN: process.env.NUXT_ENV_TELEGRAM_TOKEN
-  }
+  },
 })

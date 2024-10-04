@@ -15,7 +15,7 @@ services:
     container_name: crypto-tracker_frontend
     restart: never
     volumes:
-      - ./frontend/dist:/dist
+      - ./frontend/.outout:/.output
 
   api:
    build: ./api
