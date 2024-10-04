@@ -13,7 +13,7 @@ services:
   frontend: 
     build: ./frontend
     container_name: crypto-tracker_frontend
-    restart: never
+    restart: no
     volumes:
       - ./frontend/.outout:/.output
 
