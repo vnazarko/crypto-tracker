@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {vueTelegramLogin} from 'vue-telegram-login'
+import { telegramLoginTemp } from 'vue3-telegram-login'
 
 function yourCallbackFunction(user) {
     console.log(user);
@@ -9,14 +9,19 @@ function yourCallbackFunction(user) {
 <template>
     <div class="container">
         <header class="header">
-            <vue-telegram-login 
+            <h1 class="header_title">CryptoTrack</h1>
+            <telegram-login-temp
                 mode="callback"
-                telegram-login="CryptoTrackByNone1qqBot"
-                @callback="yourCallbackFunction" />
+                telegram-login="YourTelegramBot"
+                @callback="yourCallbackFunction"
+            />
         </header>
     </div>
 </template>
 
 <style lang="sass" scoped>
-
+.header 
+    width: 100%
+    &_title 
+        color: white
 </style>
