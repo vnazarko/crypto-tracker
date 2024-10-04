@@ -2,17 +2,22 @@
 const testCallback = (user: any) => {
   console.log("Custom callback function: ",user);
 };
+
+onMounted(() => {
+    const script = document.createElement('script');
+    script.src = 'https://telegram.org/js/telegram-widget.js?22';
+    script.setAttribute('data-telegram-login', 'CryptoTrackByNone1qqBot');
+    script.setAttribute('data-size', 'medium');
+    script.setAttribute('data-onauth', 'testCallback(user)');
+    script.setAttribute('data-request-access', 'write');
+    document.getElementById('telegram-button').appendChild(script);
+})
 </script>
 <template>
     <header class="header">
         <h1 class="header_title">CryptoTrack</h1>
-        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="CryptoTrackByNone1qqBot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-        <script type="text/javascript">
-        function onTelegramAuth(user) {
-            console.log(user)
-        }
-        </script>
     </header>
+    <div class="header_telegram-button" id="telegram-button"></div>
 </template>
 
 <style lang="sass" scoped>
