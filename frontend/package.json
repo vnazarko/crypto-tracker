@@ -13,7 +13,8 @@
     "nuxt": "^3.13.0",
     "nuxt-telegram-auth": "^1.2.0",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue3-telegram-login": "^1.1.0"
   },
   "devDependencies": {
     "@nuxt/ui": "^2.18.6",
