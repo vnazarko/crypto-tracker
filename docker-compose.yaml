@@ -9,3 +9,30 @@ services:
       - 27017:27017
     volumes:
       - ./database-data:/data/db
+
+  frontend: 
+    build: ./frontend
+    container_name: crypto-tracker_frontend
+    restart: no
+    volumes:
+      - ./frontend/.outout:/.output
+
+  api:
+   build: ./api
+   container_name: crypto-tracker_api
+   restart: always
+   env_file:
+    - ./api/.env-prod
+   expose:
+    - 8000:8000
+   depends_on:
+    - mongodb
+   
+  parser:
+    build: ./parser
+    container_name: crypto-tracker_parser
+    restart: always
+    env_file:
+    - ./api/.env-prod
+    depends_on:
+      - mongodb
