@@ -3,21 +3,21 @@ function testCallback(user) {
   console.log("Custom callback function: ",user);
 };
 
-onMounted(() => {
-    const script = document.createElement('script');
-    script.src = 'https://telegram.org/js/telegram-widget.js?22';
-    script.setAttribute('data-telegram-login', 'CryptoTrackByNone1qqBot');
-    script.setAttribute('data-size', 'medium');
-    script.setAttribute('data-onauth', `testCallback(${testCallback.toString()})`);
-    script.setAttribute('data-request-access', 'write');
-    document.getElementById('telegram-button').appendChild(script);
-})
+// onMounted(() => {
+//     const script = document.createElement('script');
+//     script.src = 'https://telegram.org/js/telegram-widget.js?22';
+//     script.setAttribute('data-telegram-login', 'CryptoTrackByNone1qqBot');
+//     script.setAttribute('data-size', 'medium');
+//     script.setAttribute('data-onauth', `testCallback(${testCallback.toString()})`);
+//     script.setAttribute('data-request-access', 'write');
+//     document.getElementById('telegram-button').appendChild(script);
+// })
 </script>
 <template>
     <header class="header">
         <h1 class="header_title">CryptoTrack</h1>
     </header>
-    <div class="header_telegram-button" id="telegram-button"></div>
+    <TelegramLoginWidget telegram-login="my_bot" @callback="testCallback" />
 </template>
 
 <style lang="sass" scoped>
