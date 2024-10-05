@@ -32,6 +32,8 @@ async def update_prices_in_db():
         update_ton = await update_coin(coin_type=Coin.TON.value, collection=collection, binance_price=ton_binance,
                                        okx_price=ton_okx, bybit_price=ton_bybit)
 
+        ic(f'{datetime.now(timezone.utc)} Цены обновлены')
+
         await asyncio.sleep(60)
 
 
