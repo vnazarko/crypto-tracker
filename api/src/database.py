@@ -11,7 +11,8 @@ MONGO_DETAILS = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PO
 
 client = AsyncIOMotorClient(MONGO_DETAILS)
 database = client['crypto-tracker']
-collection = database.get_collection("coins")
+coins_collection = database.get_collection("coins")
+users_collection = database.get_collection("users")
 
 
 async def init_db():
@@ -19,7 +20,7 @@ async def init_db():
     eth = Coin(name='ETH')
     ton = Coin(name='TON')
 
-    result = collection.insert_many([btc.__str__(), eth.__str__(), ton.__str__()])
+    result = coins_collection.insert_many([btc.__str__(), eth.__str__(), ton.__str__()])
 
     print('База данных Mongo инициализирована')
 

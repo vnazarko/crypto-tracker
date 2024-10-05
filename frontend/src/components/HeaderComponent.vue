@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { telegramLoginTemp } from 'vue3-telegram-login'
 
-function yourCallbackFunction(user) {
+function sendUserInfo(user) {
     console.log(user);
-    
 }
+console.log(import.meta.env.VITE_API_URL);
+
 </script>
 <template>
     <div class="container">
@@ -13,7 +14,7 @@ function yourCallbackFunction(user) {
             <telegram-login-temp
                 mode="callback"
                 telegram-login="YourTelegramBot"
-                @callback="yourCallbackFunction"
+                @callback="sendUserInfo"
             />
         </header>
     </div>
