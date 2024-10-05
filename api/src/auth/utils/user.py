@@ -59,7 +59,14 @@ def get_current_token_payload(
 async def get_user_by_token_sub(payload: dict) -> UserSchema:
     user_id: str | None = payload.get("sub")
     if user := await users_collection.find_one({'id': user_id}):
-        return user
+        return UserSchema(
+            username=user['username'],
+            first_name=user['first_name'],
+            photo_url=user['photo_url'],
+            id=user['id'],
+            active=user['active'],
+            password=user['password']
+        )
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="token invalid",
