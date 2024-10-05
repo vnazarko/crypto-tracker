@@ -35,22 +35,6 @@ def create_jwt(
     )
 
 
-def create_jwt(
-        token_type: JWTTypes,
-        token_data: dict,
-        expire_minutes: int = settings.auth_jwt.access_token_expire_minutes,
-        expire_timedelta: timedelta | None = None,
-) -> str:
-    jwt_payload = {'type': token_type}
-    jwt_payload.update(token_data)
-
-    return encode_jwt(
-        payload=jwt_payload,
-        expire_minutes=expire_minutes,
-        expire_timedelta=expire_timedelta,
-    )
-
-
 def create_access_token(user: UserSchema) -> str:
     jwt_payload = {
         'sub': user['id'],
