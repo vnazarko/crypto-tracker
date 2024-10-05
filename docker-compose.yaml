@@ -25,7 +25,7 @@ services:
    restart: always
    env_file:
     - ./api/.env-prod
-   expose:
+   ports:
     - 8000:8000
    depends_on:
     - mongodb
