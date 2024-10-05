@@ -17,7 +17,7 @@ services:
     volumes:
       - ./frontend/dist:/app/dist
     env_file:
-      - /frontend/.env-prod
+      - ./frontend/.env-prod
 
   api:
    build: ./api
