@@ -16,6 +16,8 @@ services:
     restart: no
     volumes:
       - ./frontend/dist:/app/dist
+    env_file:
+      - ./frontend/.env-prod
 
   api:
    build: ./api
