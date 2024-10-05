@@ -1,11 +1,20 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.security import HTTPBearer
 from starlette.responses import JSONResponse
 
 from src.auth.schemas import TokenInfo, UserSchema
 from src.database import users_collection
-from src.auth.utils import get_current_active_auth_user, encode_jwt, validate_auth_user, hash_password
+from src.auth.utils.token import create_access_token, create_refresh_token
+from src.auth.utils.user import validate_auth_user, get_current_active_auth_user, get_current_auth_user_for_refresh
+from src.auth.utils.password import hash_password
 
-router = APIRouter(prefix='/auth', tags=['Auth'])
+http_bearer = HTTPBearer(auto_error=False)
+
+router = APIRouter(
+    prefix='/auth',
+    tags=['Auth'],
+    dependencies=[Depends(http_bearer)]
+)
 
 
 @router.post('/register')
@@ -35,15 +44,23 @@ def auth_user(
         user: UserSchema = Depends(validate_auth_user)
 ):
 
-    jwt_payload = {
-        'sub': user['id'],
-    }
-
-    access_token = encode_jwt(jwt_payload)
+    access_token = create_access_token(user)
+    refresh_token = create_refresh_token(user)
 
     return TokenInfo(
         access_token=access_token,
-        token_type='Bearer'
+        refresh_token=refresh_token,
+    )
+
+
+@router.post('/refresh', response_model=TokenInfo, response_model_exclude_none=True)
+def auth_refresh_token(
+        user: UserSchema = Depends(get_current_auth_user_for_refresh)
+):
+    access_token = create_access_token(user)
+
+    return TokenInfo(
+        access_token=access_token,
     )
 
 
@@ -54,3 +71,5 @@ def auth_user_check_info(
     return {
         'username': user.username
     }
+
+
