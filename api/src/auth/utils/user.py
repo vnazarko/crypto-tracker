@@ -11,6 +11,7 @@ from src.database import users_collection
 
 async def validate_auth_user(
         id: int = Form(),
+        hash: str = Form(),
 ):
     unauthed_exc = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

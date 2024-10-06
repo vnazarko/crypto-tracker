@@ -39,7 +39,6 @@ async def register_user(user: UserSchema):
 
 @router.post('/login', response_model=TokenInfo)
 def auth_user(
-        hash: str,
         user: UserSchema = Depends(validate_auth_user)
 ):
 
