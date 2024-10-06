@@ -12,5 +12,4 @@ class UserSchema(BaseModel):
     username: str | None = None
     first_name: str
     photo_url: str
-    password: bytes | str
     active: bool = True
