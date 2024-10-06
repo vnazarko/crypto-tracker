@@ -5,18 +5,16 @@ from src.auth.enums import JWTTypes
 from src.auth.schemas import UserSchema
 
 from src.auth import oauth2_scheme
-from src.auth.utils.password import validate_password
 from src.auth.utils.token import decode_jwt, validate_token_type
 from src.database import users_collection
 
 
 async def validate_auth_user(
-        username: str = Form(),
-        password: str = Form()
+        id: int = Form(),
 ):
     unauthed_exc = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail='Invalid username or password',
+        detail='Invalid id',
     )
 
     user = await users_collection.find_one({'id': id})
