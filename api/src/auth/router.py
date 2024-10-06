@@ -6,7 +6,6 @@ from src.auth.schemas import TokenInfo, UserSchema
 from src.database import users_collection
 from src.auth.utils.token import create_access_token, create_refresh_token
 from src.auth.utils.user import validate_auth_user, get_current_active_auth_user, get_current_auth_user_for_refresh
-from src.auth.utils.password import hash_password
 
 http_bearer = HTTPBearer(auto_error=False)
 
@@ -29,7 +28,6 @@ async def register_user(user: UserSchema):
         'username': user.username,
         'first_name': user.first_name,
         'photo_url': user.photo_url,
-        'password': hash_password(user.password),
         'active': user.active
     })
 

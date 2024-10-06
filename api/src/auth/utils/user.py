@@ -19,12 +19,9 @@ async def validate_auth_user(
         detail='Invalid username or password',
     )
 
-    user = await users_collection.find_one({'username': username})
+    user = await users_collection.find_one({'id': id})
 
     if not user:
-        raise unauthed_exc
-
-    if not validate_password(password=password, hashed_password=user['password']):
         raise unauthed_exc
 
     if not user['active']:
@@ -65,7 +62,6 @@ async def get_user_by_token_sub(payload: dict) -> UserSchema:
             photo_url=user['photo_url'],
             id=user['id'],
             active=user['active'],
-            password=user['password']
         )
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
