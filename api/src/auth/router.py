@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPBearer
+from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from src.auth.schemas import TokenInfo, UserSchema
@@ -53,6 +54,7 @@ def auth_user(
 
 @router.post('/refresh', response_model=TokenInfo, response_model_exclude_none=True)
 def auth_refresh_token(
+        request: Request,
         user: UserSchema = Depends(get_current_auth_user_for_refresh)
 ):
     access_token = create_access_token(user)

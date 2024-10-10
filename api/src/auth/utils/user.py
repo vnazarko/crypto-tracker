@@ -29,7 +29,13 @@ async def validate_auth_user(
             detail='User is inactive',
         )
 
-    return user
+    return UserSchema(
+        id=user['id'],
+        username=user['username'],
+        first_name=user['first_name'],
+        photo_url=user['photo_url'],
+        active=user['active'],
+    )
 
 
 def get_current_token_payload(
