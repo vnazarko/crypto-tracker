@@ -5,3 +5,5 @@ class Coin:
 
     def __str__(self):
         return {"name": self.name, "prices": self.prices}
+
+    
