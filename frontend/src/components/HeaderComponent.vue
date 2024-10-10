@@ -107,13 +107,6 @@ function authFunc(method, url, callback) {
         })
     }
 }
-
-
-function testAuth() {
-    authFunc('GET', '/auth/users/me', (res) => {
-        console.log(res.data);
-    })
-}
 </script>
 <template>
     <div class="container">
@@ -124,7 +117,6 @@ function testAuth() {
                 telegram-login="CryptoTrackByNone1qqBot"
                 @callback="sendUserInfo"
             />
-            <button @click="testAuth">dsvs</button>
         </header>
     </div>
 </template>
@@ -132,6 +124,16 @@ function testAuth() {
 <style lang="sass" scoped>
 .header 
     width: 100%
+    height: 90px
+    display: flex 
+    justify-content: space-between
+    align-items: center
+    border-bottom: solid 1px rgba(1, 101, 56, 0.4)
     &_title 
-        color: white
+        color: #EFFDF5
+        font-size: 30px
+        font-family: DM_Sans
+        font-weight: 700 
+        text-align: center 
+
 </style>

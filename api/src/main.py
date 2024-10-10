@@ -5,13 +5,16 @@ import asyncio
 from starlette.middleware.cors import CORSMiddleware
 
 from src.auth.router import router as auth_router
+from src.cryptocurrency.router import router as cryptocurrency_router
 
 app = FastAPI()
 
 app.include_router(auth_router)
+app.include_router(cryptocurrency_router)
 
 origins = [
     "https://crypto-track.none1qq.ru",
+    "http://localhost:5173"
 ]
 
 app.add_middleware(
