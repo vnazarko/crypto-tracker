@@ -13,7 +13,9 @@ async def all_coins():
     coins_for_response = []
 
     for coin in coins:
-        coins_for_response.append(coin['name'])
+        coins_for_response.append({
+            'name': coin['name']
+        })
 
     return JSONResponse(
         status_code=200,

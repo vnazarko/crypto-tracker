@@ -4,6 +4,8 @@ import axios from 'axios';
 function getCryptocurrencies() {
     axios.get(`https://${import.meta.env.VITE_API_URL}/crypto/get`)
     .then((response) => {
+        console.log(response.data);
+        
         return response.data.payload;
      })
 }
