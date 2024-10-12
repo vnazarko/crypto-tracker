@@ -1,4 +1,9 @@
-from fastapi import APIRouter, HTTPException
+import asyncio
+import json
+from datetime import datetime, timedelta
+
+from fastapi import APIRouter, HTTPException, WebSocket
+from icecream import ic
 
 from src.cryptocurrency.schemas import Coin
 from src.cryptocurrency.responses import SuccessGetCoins, SuccessGetCurrentCoin
@@ -42,3 +47,24 @@ async def get_current_coin(coin_id: int):
     return SuccessGetCurrentCoin(
         payload=coin_for_response
     )
+
+
+@router.websocket('/ws/{coin_id}')
+async def get_price_of_current_coin(websocket: WebSocket, coin_id: int):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+
+        if data == 'Get All Prices':
+            while True:
+                previous_prices = ''
+
+                all_prices = await coins_collection.find_one({'coin_id': coin_id})
+
+                two_hours_ago = datetime.utcnow() - timedelta(hours=2)
+                prices = [dt for dt in all_prices['prices'] if dt['timestamp'] > two_hours_ago]
+
+                if json.dumps(prices) != json.dumps(previous_prices):
+                    await websocket.send_text(f"{prices}")
+                await asyncio.sleep(15)
+

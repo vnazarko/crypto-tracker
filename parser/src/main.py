@@ -34,7 +34,7 @@ async def update_prices_in_db():
 
         ic(f'{datetime.now(timezone.utc)} Цены обновлены')
 
-        await asyncio.sleep(60)
+        await asyncio.sleep(15)
 
 
 async def main():
