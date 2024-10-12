@@ -5,7 +5,7 @@ import axios from 'axios'
 function sendUserInfo(user) {
     axios
         .post(
-            `https://${import.meta.env.VITE_API_URL}/auth/register`, 
+            `${import.meta.env.VITE_API_URL}/auth/register`, 
             {
                 'id': user.id,
                 'username': user.username,
@@ -31,7 +31,7 @@ function login(id, hash) {
     form.append('id', id);
     form.append('hash', hash);
 
-    axios.post(`https://${import.meta.env.VITE_API_URL}/auth/login`, form, {
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -60,7 +60,7 @@ function authFunc(method, url, callback) {
                 access_token = res.data.access_token;
                 localStorage.setItem('access_token', access_token);
                 
-                axios.get(`https://${import.meta.env.VITE_API_URL}${url}`, {
+                axios.get(`${import.meta.env.VITE_API_URL}${url}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
                     }
@@ -73,7 +73,7 @@ function authFunc(method, url, callback) {
     } else {
         axios({
             method: method,
-            url: `https://${import.meta.env.VITE_API_URL}${url}`,
+            url: `${import.meta.env.VITE_API_URL}${url}`,
             headers: {
                 Authorization: `Bearer ${access_token}`
             }
@@ -81,7 +81,7 @@ function authFunc(method, url, callback) {
             callback(res);
         }).catch((err) => {
             if (err.response.status === 401) {
-                axios.post(`https://${import.meta.env.VITE_API_URL}/auth/refresh`, null, {
+                axios.post(`${import.meta.env.VITE_API_URL}/auth/refresh`, null, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
                     }
@@ -91,7 +91,7 @@ function authFunc(method, url, callback) {
                         localStorage.setItem('access_token', access_token);
                         axios({
                             method: method,
-                            url: `https://${import.meta.env.VITE_API_URL}${url}`,
+                            url: `${import.meta.env.VITE_API_URL}${url}`,
                             headers: {
                                 'Authorization': `Bearer ${access_token}`
                             }
@@ -135,5 +135,4 @@ function authFunc(method, url, callback) {
         font-family: DM_Sans
         font-weight: 700 
         text-align: center 
-
 </style>

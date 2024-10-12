@@ -14,6 +14,7 @@ app.include_router(cryptocurrency_router)
 
 origins = [
     "https://crypto-track.none1qq.ru",
+    "https://api.crypto-track.none1qq.ru"
     "http://localhost:5173"
 ]
 

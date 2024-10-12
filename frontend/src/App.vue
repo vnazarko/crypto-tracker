@@ -3,9 +3,9 @@ import { onMounted } from 'vue';
 import { RouterView } from 'vue-router'
 
 onMounted(() => {
-  localStorage.setItem('coin', 'BTC');
+  localStorage.setItem('coin', '1');
   localStorage.setItem('currency', 'USD');
-  localStorage.setItem('stockMarket', 'Binance');
+  localStorage.setItem('stock-market', 'Binance');
 })
 </script>
 
